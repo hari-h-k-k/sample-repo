@@ -1,0 +1,17 @@
+name: Fix PR Review Comments
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    if: github.event.review.state == 'changes_requested'
+    permissions:
+      contents: write
+      pull-requests: read
+    steps:
+      - uses: your-org/aider-bot@main
+        with:
+          morph_api_key: ${{ secrets.MORPH_API_KEY }}
