@@ -12,6 +12,6 @@ jobs:
       contents: write
       pull-requests: read
     steps:
-      - uses: your-org/aider-bot@main
+      - uses: hari-h-k-k/aider-bot@main
         with:
           morph_api_key: ${{ secrets.MORPH_API_KEY }}
