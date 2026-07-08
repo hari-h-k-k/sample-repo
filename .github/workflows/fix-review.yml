@@ -1,13 +1,15 @@
 name: Fix PR Review Comments
 
 on:
-  pull_request_review:
-    types: [submitted]
+  issue_comment:
+    types: [created]
 
 jobs:
   fix:
     runs-on: ubuntu-latest
-    if: github.event.review.state == 'changes_requested'
+    if: |
+      github.event.issue.pull_request &&
+      startsWith(github.event.comment.body, '/aiderfix')
     permissions:
       contents: write
       pull-requests: read
@@ -15,3 +17,4 @@ jobs:
       - uses: hari-h-k-k/aider-bot@main
         with:
           morph_api_key: ${{ secrets.MORPH_API_KEY }}
+          comment_body: ${{ github.event.comment.body }}
